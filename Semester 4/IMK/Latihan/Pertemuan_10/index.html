@@ -1,486 +1,187 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Layout Web - Tugas IMK</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital@0;1&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <title>Layout Halaman Muka Website</title>
 
-    :root {
-      --primary: #1a1a2e;
-      --accent: #e94560;
-      --accent2: #f5a623;
-      --bg: #f7f5f0;
-      --card: #ffffff;
-      --text: #1a1a2e;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-    }
+    <style>
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:#fff4f8;
+        }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--primary);
-      color: white;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,.25);
-    }
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-    .logo span { color: var(--accent); }
-    nav { display: flex; gap: 0.25rem; }
-    nav a {
-      color: rgba(255,255,255,.75);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      padding: 0.4rem 0.85rem;
-      border-radius: 6px;
-      transition: all .2s;
-    }
-    nav a:hover, nav a.active {
-      background: rgba(255,255,255,.12);
-      color: white;
-    }
-    .btn-login {
-      background: var(--accent);
-      color: white !important;
-      border-radius: 8px !important;
-      padding: 0.4rem 1rem !important;
-    }
-    .btn-login:hover { background: #c73652 !important; }
+        header{
+            background:linear-gradient(135deg,#ff7eb3,#ffb6d9);
+            color:white;
+            padding:18px;
+            text-align:center;
+        }
 
-    /* ── SEARCH BAR ── */
-    .search-section {
-      background: var(--primary);
-      padding: 1.5rem 2rem 2rem;
-      display: flex;
-      justify-content: center;
-    }
-    .search-wrap {
-      display: flex;
-      width: 100%;
-      max-width: 620px;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,.2);
-    }
-    .search-wrap input {
-      flex: 1;
-      border: none;
-      outline: none;
-      padding: 0.85rem 1.25rem;
-      font-family: inherit;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-    .search-wrap button {
-      background: var(--accent);
-      border: none;
-      color: white;
-      padding: 0 1.4rem;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .search-wrap button:hover { background: #c73652; }
+        .container{
+            width:90%;
+            max-width:1000px;
+            margin:20px auto;
+            background:white;
+            border-radius:14px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+        }
 
-    /* ── HERO / BANNER ── */
-    .hero {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: white;
-      padding: 4rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 300px; height: 300px;
-      background: var(--accent);
-      border-radius: 50%;
-      opacity: 0.08;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: -40px;
-      width: 250px; height: 250px;
-      background: var(--accent2);
-      border-radius: 50%;
-      opacity: 0.07;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(233,69,96,.2);
-      color: #ff6b84;
-      border: 1px solid rgba(233,69,96,.4);
-      padding: 0.3rem 1rem;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero p {
-      color: rgba(255,255,255,.65);
-      max-width: 480px;
-      margin: 0 auto 2rem;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.75rem;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233,69,96,.4); }
-    .btn-outline {
-      background: transparent;
-      color: white;
-      border: 1.5px solid rgba(255,255,255,.4);
-      padding: 0.75rem 1.75rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: border-color .2s, background .2s;
-    }
-    .btn-outline:hover { border-color: white; background: rgba(255,255,255,.08); }
+        .layout{
+            border:2px solid #ffc6dd;
+            margin:20px;
+        }
 
-    /* ── MAIN CONTENT AREA ── */
-    .main-wrap {
-      max-width: 1100px;
-      margin: 2.5rem auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 2rem;
-    }
+        .header-box{
+            background:#ffd6e8;
+            padding:16px;
+            text-align:center;
+            font-weight:bold;
+            border-bottom:2px solid #ffb6d1;
+        }
 
-    /* ── CONTENT ── */
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 2px;
-      background: var(--border);
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-      margin-bottom: 2rem;
-    }
-    .card {
-      background: var(--card);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,.06);
-      transition: transform .2s, box-shadow .2s;
-      cursor: pointer;
-    }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
-    .card-img {
-      height: 130px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-    }
-    .card-img.c1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-    .card-img.c2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
-    .card-img.c3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-    .card-img.c4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-    .card-body { padding: 1rem; }
-    .card-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--accent);
-      margin-bottom: 0.35rem;
-    }
-    .card-body h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.35rem; line-height: 1.35; }
-    .card-body p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.75rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+        .search-box{
+            background:#fff0f6;
+            padding:14px;
+            text-align:center;
+            border-bottom:2px solid #ffb6d1;
+        }
 
-    /* ── SIDEBAR ── */
-    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
-    .widget {
-      background: var(--card);
-      border-radius: 12px;
-      padding: 1.25rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,.06);
-    }
-    .widget-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-    .category-list { display: flex; flex-direction: column; gap: 0.5rem; }
-    .category-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.55rem 0.75rem;
-      background: var(--bg);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: background .15s;
-    }
-    .category-item:hover { background: #ede9e0; }
-    .category-count {
-      background: var(--primary);
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 50px;
-    }
-    .popular-list { display: flex; flex-direction: column; gap: 0.85rem; }
-    .popular-item { display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; }
-    .popular-num {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--border);
-      line-height: 1;
-      min-width: 1.5rem;
-    }
-    .popular-item:hover .popular-num { color: var(--accent); }
-    .popular-text { font-size: 0.82rem; font-weight: 600; line-height: 1.4; color: var(--text); }
+        .hero-box{
+            background:#ffe5f0;
+            padding:45px;
+            text-align:center;
+            border-bottom:2px solid #ffb6d1;
+        }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--primary);
-      color: rgba(255,255,255,.6);
-      padding: 2rem;
-      margin-top: 3rem;
-    }
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .footer-links a {
-      color: rgba(255,255,255,.55);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color .2s;
-    }
-    .footer-links a:hover { color: white; }
-    .footer-copy { font-size: 0.8rem; }
-    .footer-copy span { color: var(--accent); }
-    .socials { display: flex; gap: 0.75rem; }
-    .social-btn {
-      width: 34px; height: 34px;
-      background: rgba(255,255,255,.1);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .social-btn:hover { background: var(--accent); }
+        .hero-box h2{
+            margin:0;
+            color:#ff4f93;
+        }
 
-    @media (max-width: 720px) {
-      .main-wrap { grid-template-columns: 1fr; }
-      .cards-grid { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+        .hero-box p{
+            margin-top:10px;
+            color:#666;
+        }
+
+        .content{
+            display:flex;
+        }
+
+        .main-content{
+            width:70%;
+            padding:35px;
+            border-right:2px solid #ffb6d1;
+            background:white;
+        }
+
+        .article{
+            background:#fff4f8;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:15px;
+        }
+
+        .article h3{
+            margin-top:0;
+            color:#ff4f93;
+        }
+
+        .sidebar{
+            width:30%;
+            padding:25px;
+            background:#fff7fa;
+        }
+
+        .sidebar-box{
+            background:#ffe5f0;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:15px;
+        }
+
+        .sidebar-box h3{
+            margin-top:0;
+            color:#ff4f93;
+        }
+
+        .footer-box{
+            background:#ffd6e8;
+            padding:16px;
+            text-align:center;
+            border-top:2px solid #ffb6d1;
+        }
+
+    </style>
 </head>
+
 <body>
 
-  <!-- ① HEADER -->
-  <header>
-    <div class="logo">Web<span>IMK</span></div>
-    <nav>
-      <a href="#" class="active">Beranda</a>
-      <a href="#">Artikel</a>
-      <a href="#">Kategori</a>
-      <a href="#">Tentang</a>
-      <a href="#" class="btn-login">Login</a>
-    </nav>
-  </header>
+<header>
+    <h1>Layout Halaman Muka Website</h1>
+</header>
 
-  <!-- ② SEARCH BAR -->
-  <div class="search-section">
-    <div class="search-wrap">
-      <input type="text" placeholder="🔍  Cari artikel, topik, atau kategori..."/>
-      <button>Cari</button>
+<div class="container">
+
+    <div class="layout">
+
+        <div class="header-box">
+            LOGO | Home | About | Login
+        </div>
+
+        <div class="search-box">
+            Cari artikel atau informasi...
+        </div>
+
+        <div class="hero-box">
+            <h2>Selamat Datang di Website Kami</h2>
+            <p>Website sederhana dengan tampilan layout halaman muka.</p>
+        </div>
+
+        <div class="content">
+
+            <div class="main-content">
+
+                <div class="article">
+                    <h3>Artikel Terbaru</h3>
+                    <p>Informasi terbaru ditampilkan pada bagian konten utama website.</p>
+                </div>
+
+                <div class="article">
+                    <h3>Berita Populer</h3>
+                    <p>Berisi berita atau informasi yang banyak dilihat pengguna.</p>
+                </div>
+
+            </div>
+
+            <div class="sidebar">
+
+                <div class="sidebar-box">
+                    <h3>Kategori</h3>
+                    <p>Teknologi</p>
+                    <p>Pendidikan</p>
+                    <p>Desain</p>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Konten Populer</h3>
+                    <p>Layout Website</p>
+                    <p>UI dan UX</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-box">
+            Kontak | Bantuan | Copyright
+        </div>
+
     </div>
-  </div>
 
-  <!-- ③ HERO / BANNER -->
-  <section class="hero">
-    <div class="hero-badge">✦ Website Edukasi IMK</div>
-    <h1>Belajar <span>Interaksi</span><br/>Manusia & Komputer</h1>
-    <p>Temukan artikel, materi, dan contoh nyata seputar desain antarmuka yang mudah dipahami oleh siapapun.</p>
-    <div class="hero-btns">
-      <button class="btn-primary">Mulai Belajar →</button>
-      <button class="btn-outline">Lihat Materi</button>
-    </div>
-  </section>
-
-  <!-- ④ KONTEN UTAMA + SIDEBAR -->
-  <div class="main-wrap">
-
-    <!-- KONTEN -->
-    <main>
-      <div class="section-title">Artikel Terbaru</div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-img c1">🖥️</div>
-          <div class="card-body">
-            <div class="card-tag">Desain UI</div>
-            <h3>Prinsip Dasar Desain Antarmuka yang Baik</h3>
-            <p>Pelajari apa saja yang membuat sebuah tampilan aplikasi nyaman digunakan.</p>
-            <div class="card-meta"><span>📅 20 Mei 2026</span><span>5 mnt baca</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img c2">🧠</div>
-          <div class="card-body">
-            <div class="card-tag">Faktor Manusia</div>
-            <h3>Memahami Cara Kerja Memori Pengguna</h3>
-            <p>Bagaimana otak manusia memproses informasi dari layar komputer.</p>
-            <div class="card-meta"><span>📅 18 Mei 2026</span><span>4 mnt baca</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img c3">⚙️</div>
-          <div class="card-body">
-            <div class="card-tag">Ergonomi</div>
-            <h3>Posisi Duduk yang Benar Saat Pakai Komputer</h3>
-            <p>Tips ergonomi agar tidak cepat lelah saat bekerja di depan layar.</p>
-            <div class="card-meta"><span>📅 15 Mei 2026</span><span>3 mnt baca</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img c4">📱</div>
-          <div class="card-body">
-            <div class="card-tag">Prototipe</div>
-            <h3>Kenapa Prototipe Penting Sebelum Membangun Sistem</h3>
-            <p>Manfaat membuat versi percobaan sebelum aplikasi benar-benar dibuat.</p>
-            <div class="card-meta"><span>📅 12 Mei 2026</span><span>6 mnt baca</span></div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- ⑤ SIDEBAR -->
-    <aside class="sidebar">
-      <div class="widget">
-        <div class="widget-title">Kategori</div>
-        <div class="category-list">
-          <div class="category-item">Desain UI <span class="category-count">12</span></div>
-          <div class="category-item">Ergonomi <span class="category-count">8</span></div>
-          <div class="category-item">Faktor Manusia <span class="category-count">10</span></div>
-          <div class="category-item">Prototipe <span class="category-count">5</span></div>
-          <div class="category-item">Evaluasi Sistem <span class="category-count">7</span></div>
-        </div>
-      </div>
-      <div class="widget">
-        <div class="widget-title">Artikel Populer</div>
-        <div class="popular-list">
-          <div class="popular-item">
-            <span class="popular-num">01</span>
-            <span class="popular-text">Apa itu IMK dan Mengapa Penting?</span>
-          </div>
-          <div class="popular-item">
-            <span class="popular-num">02</span>
-            <span class="popular-text">7 Prinsip Desain Antarmuka Terbaik</span>
-          </div>
-          <div class="popular-item">
-            <span class="popular-num">03</span>
-            <span class="popular-text">Perbedaan UI dan UX yang Sering Salah Dipahami</span>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-  </div>
-
-  <!-- ⑥ FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-copy">© 2026 <span>WebIMK</span> — Tugas Mata Kuliah IMK</div>
-      <div class="footer-links">
-        <a href="#">Beranda</a>
-        <a href="#">Tentang</a>
-        <a href="#">Kontak</a>
-        <a href="#">Bantuan</a>
-      </div>
-      <div class="socials">
-        <div class="social-btn">ig</div>
-        <div class="social-btn">yt</div>
-        <div class="social-btn">gh</div>
-      </div>
-    </div>
-  </footer>
+</div>
 
 </body>
 </html>
