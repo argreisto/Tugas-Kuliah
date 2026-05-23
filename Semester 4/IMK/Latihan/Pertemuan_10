@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout Halaman Muka Website</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:#fff4f8;
+        }
+
+        header{
+            background:linear-gradient(135deg,#ff7eb3,#ffb6d9);
+            color:white;
+            padding:18px;
+            text-align:center;
+        }
+
+        .container{
+            width:90%;
+            max-width:1000px;
+            margin:20px auto;
+            background:white;
+            border-radius:14px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .layout{
+            border:2px solid #ffc6dd;
+            margin:20px;
+        }
+
+        .header-box{
+            background:#ffd6e8;
+            padding:16px;
+            text-align:center;
+            font-weight:bold;
+            border-bottom:2px solid #ffb6d1;
+        }
+
+        .search-box{
+            background:#fff0f6;
+            padding:14px;
+            text-align:center;
+            border-bottom:2px solid #ffb6d1;
+        }
+
+        .hero-box{
+            background:#ffe5f0;
+            padding:45px;
+            text-align:center;
+            border-bottom:2px solid #ffb6d1;
+        }
+
+        .hero-box h2{
+            margin:0;
+            color:#ff4f93;
+        }
+
+        .hero-box p{
+            margin-top:10px;
+            color:#666;
+        }
+
+        .content{
+            display:flex;
+        }
+
+        .main-content{
+            width:70%;
+            padding:35px;
+            border-right:2px solid #ffb6d1;
+            background:white;
+        }
+
+        .article{
+            background:#fff4f8;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:15px;
+        }
+
+        .article h3{
+            margin-top:0;
+            color:#ff4f93;
+        }
+
+        .sidebar{
+            width:30%;
+            padding:25px;
+            background:#fff7fa;
+        }
+
+        .sidebar-box{
+            background:#ffe5f0;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:15px;
+        }
+
+        .sidebar-box h3{
+            margin-top:0;
+            color:#ff4f93;
+        }
+
+        .footer-box{
+            background:#ffd6e8;
+            padding:16px;
+            text-align:center;
+            border-top:2px solid #ffb6d1;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Layout Halaman Muka Website</h1>
+</header>
+
+<div class="container">
+
+    <div class="layout">
+
+        <div class="header-box">
+            LOGO | Home | About | Login
+        </div>
+
+        <div class="search-box">
+            Cari artikel atau informasi...
+        </div>
+
+        <div class="hero-box">
+            <h2>Selamat Datang di Website Kami</h2>
+            <p>Website sederhana dengan tampilan layout halaman muka.</p>
+        </div>
+
+        <div class="content">
+
+            <div class="main-content">
+
+                <div class="article">
+                    <h3>Artikel Terbaru</h3>
+                    <p>Informasi terbaru ditampilkan pada bagian konten utama website.</p>
+                </div>
+
+                <div class="article">
+                    <h3>Berita Populer</h3>
+                    <p>Berisi berita atau informasi yang banyak dilihat pengguna.</p>
+                </div>
+
+            </div>
+
+            <div class="sidebar">
+
+                <div class="sidebar-box">
+                    <h3>Kategori</h3>
+                    <p>Teknologi</p>
+                    <p>Pendidikan</p>
+                    <p>Desain</p>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Konten Populer</h3>
+                    <p>Layout Website</p>
+                    <p>UI dan UX</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-box">
+            Kontak | Bantuan | Copyright
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
