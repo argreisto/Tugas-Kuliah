@@ -1,0 +1,84 @@
+{
+  "klasifikasi": [
+    {
+      "Model": "Random Forest",
+      "Accuracy": 0.904,
+      "Precision": 0.933,
+      "Recall": 0.877,
+      "F1": 0.904
+    },
+    {
+      "Model": "KNN",
+      "Accuracy": 0.894,
+      "Precision": 0.92,
+      "Recall": 0.87,
+      "F1": 0.894
+    },
+    {
+      "Model": "Decision Tree",
+      "Accuracy": 0.873,
+      "Precision": 0.865,
+      "Recall": 0.892,
+      "F1": 0.879
+    },
+    {
+      "Model": "Logistic Regression",
+      "Accuracy": 0.833,
+      "Precision": 0.852,
+      "Recall": 0.82,
+      "F1": 0.835
+    }
+  ],
+  "regresi": [
+    {
+      "Model": "Random Forest",
+      "MAE": 2.872,
+      "RMSE": 6.779,
+      "R2": 0.837
+    },
+    {
+      "Model": "Decision Tree",
+      "MAE": 5.26,
+      "RMSE": 9.581,
+      "R2": 0.675
+    },
+    {
+      "Model": "KNN",
+      "MAE": 4.772,
+      "RMSE": 10.289,
+      "R2": 0.625
+    },
+    {
+      "Model": "Linear Regression",
+      "MAE": 7.904,
+      "RMSE": 12.319,
+      "R2": 0.462
+    }
+  ],
+  "segmen": [
+    {
+      "HC": 0,
+      "rate": 11.5,
+      "gdp_pc": 59951.4,
+      "n": 21
+    },
+    {
+      "HC": 1,
+      "rate": 5.9,
+      "gdp_pc": 13229.2,
+      "n": 52
+    },
+    {
+      "HC": 2,
+      "rate": 25.4,
+      "gdp_pc": 12422.3,
+      "n": 15
+    },
+    {
+      "HC": 3,
+      "rate": 16.3,
+      "gdp_pc": 32716.9,
+      "n": 4
+    }
+  ]
+}
