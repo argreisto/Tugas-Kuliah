@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Analisis Suicide Rate 2010–2012</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1f2a44;--teal:#17a398;--amb:#f2a541;--bg:#f4f3ee;--tx:#27303f;--mu:#6d7482;--ln:#e2e0d8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,sans-serif;color:var(--tx);background:#dedcd4;font-size:15px}
+#app{max-width:480px;min-height:100vh;margin:auto;background:var(--bg);padding-bottom:88px}
+header{background:var(--navy);color:#fff;padding:26px 20px 56px;border-radius:0 0 28px 28px}
+header small{color:#aeb7cc;font-size:12.5px;letter-spacing:.3px}
+header h1{font-size:23px;font-weight:800;margin:6px 0 4px;line-height:1.25}
+header p{color:#c9d0e0;font-size:13px}
+main{padding:0 16px}
+.pg{display:none}.pg.on{display:block}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:-34px}
+.tile{background:#fff;border:1px solid var(--ln);border-radius:16px;padding:14px 10px;text-align:center}
+.tile b{display:block;font-size:21px;font-weight:800;color:var(--teal)}
+.tile span{font-size:11.5px;color:var(--mu)}
+h2{font-size:16px;font-weight:800;margin:24px 0 10px}
+.card{background:#fff;border:1px solid var(--ln);border-radius:16px;padding:16px;margin-top:10px}
+.step{display:flex;gap:12px;padding:9px 0;align-items:flex-start}
+.step i{flex:none;width:26px;height:26px;border-radius:8px;background:var(--navy);color:#fff;font:700 12.5px Manrope;display:grid;place-items:center}
+.step p{font-size:13.5px;line-height:1.45}.step b{display:block;font-size:14px}
+.bar{margin:11px 0}.bar p{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.bar i{display:block;height:9px;border-radius:9px;background:#efede6;overflow:hidden}
+.bar u{display:block;height:100%;background:var(--teal);border-radius:9px}
+.bar.a u{background:var(--amb)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11.5px;color:var(--mu);text-align:right;font-weight:600;padding:0 0 8px}th:first-child,td:first-child{text-align:left}
+td{padding:10px 0;border-top:1px solid var(--ln);text-align:right}
+tr.best td{font-weight:800;color:var(--teal)}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--ln);font-size:14px}
+.row:first-of-type{border:0}.row span:last-child{font-weight:600}
+.note{font-size:12.5px;color:var(--mu);line-height:1.5;margin-top:10px}
+label{display:block;font-size:13px;color:var(--mu);margin:14px 0 5px}
+select{width:100%;padding:12px;border:1px solid var(--ln);border-radius:12px;font:inherit;background:#fff}
+.btn{width:100%;margin-top:18px;padding:14px;border:0;border-radius:12px;background:var(--navy);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+#hasil{display:none}.big{font-size:30px;font-weight:800;margin:2px 0 6px}.hi{color:#c8452c}.lo{color:var(--teal)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;display:flex;border-top:1px solid var(--ln);padding:8px 0 10px}
+nav button{flex:1;background:none;border:0;font:inherit;font-size:12px;color:#8a909c;cursor:pointer}
+nav svg{display:block;margin:0 auto 3px;width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav .on{color:var(--navy);font-weight:800}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="a" viewBox="0 0 24 24"><path d="M4 20h16M7 20v-7M12 20V6M17 20v-10"/></symbol>
+<symbol id="b" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></symbol>
+<symbol id="c" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 7h8M7 9l4 7M17 9l-4 7"/></symbol>
+<symbol id="d" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</defs></svg>
+
+<div id="app">
+<header>
+  <small>TUGAS ANALISIS DATA &middot; {{ r.negara }} NEGARA</small>
+  <h1>Suicide Rate per 100 Ribu Penduduk</h1>
+  <p>Data 2010–2012 &middot; Argreisto Daniel K. &middot; 05TPLP023</p>
+</header>
+
+<main>
+<!-- RINGKASAN -->
+<div class="pg on" id="ringkasan">
+  <div class="tiles">
+    <div class="tile"><b>{{ "{:,}".format(r.baris).replace(",", ".") }}</b><span>baris data</span></div>
+    <div class="tile"><b>{{ r.negara }}</b><span>negara</span></div>
+    <div class="tile"><b>{{ r.rata }}</b><span>rata-rata angka</span></div>
+  </div>
+
+  <h2>Alur Analisis</h2>
+  <div class="card">
+    <div class="step"><i>1</i><p><b>Data dan cleaning</b>master.csv Kaggle, difilter 2010–2012, HDI kosong diisi median.</p></div>
+    <div class="step"><i>2</i><p><b>EDA</b>Sebaran, outlier, dan perbandingan angka antar jenis kelamin, umur, dan negara.</p></div>
+    <div class="step"><i>3</i><p><b>Modelling</b>Klasifikasi risiko Tinggi/Rendah, regresi angka, dan clustering negara.</p></div>
+    <div class="step"><i>4</i><p><b>Evaluasi</b>Perbandingan model, cross validation, dan split per negara.</p></div>
+  </div>
+
+  <h2>Temuan Utama</h2>
+  <div class="card">
+    <div class="row"><span>Laki-laki dibanding perempuan</span><span>{{ (jk.male/jk.female)|round(1) }}x</span></div>
+    <div class="row"><span>Kelompok umur tertinggi</span><span>75+ tahun</span></div>
+    <div class="row"><span>Selisih antar tahun</span><span>kecil</span></div>
+  </div>
+  <p class="note">Kalau kamu atau orang di sekitarmu sedang merasa berat, layanan kesehatan jiwa Kemenkes bisa dihubungi di 119 ekstensi 8.</p>
+</div>
+
+<!-- EKSPLORASI -->
+<div class="pg" id="eksplorasi">
+  <h2 style="margin-top:22px">Jenis Kelamin</h2>
+  <div class="card">
+    {% set mx = [jk.male, jk.female]|max %}
+    {% for k, n in [("male","Laki-laki"),("female","Perempuan")] %}
+    <div class="bar"><p><span>{{ n }}</span><b>{{ jk[k] }}</b></p><i><u style="width:{{ jk[k]/mx*100 }}%"></u></i></div>
+    {% endfor %}
+  </div>
+  <h2>Kelompok Umur</h2>
+  <div class="card">
+    {% set mu = umur|map(attribute=1)|max %}
+    {% for a, v in umur %}
+    <div class="bar"><p><span>{{ a.replace(" years"," tahun") }}</span><b>{{ v }}</b></p><i><u style="width:{{ v/mu*100 }}%"></u></i></div>
+    {% endfor %}
+  </div>
+  <h2>Per Tahun</h2>
+  <div class="card">
+    {% set my = tahun.values()|max %}
+    {% for t, v in tahun.items() %}
+    <div class="bar a"><p><span>{{ t }}</span><b>{{ v }}</b></p><i><u style="width:{{ v/my*100 }}%"></u></i></div>
+    {% endfor %}
+  </div>
+  <h2>10 Negara Tertinggi</h2>
+  <div class="card">
+    {% for n, v in top %}<div class="row"><span>{{ loop.index }}. {{ n }}</span><span>{{ v }}</span></div>{% endfor %}
+  </div>
+</div>
+
+<!-- MODEL -->
+<div class="pg" id="model">
+  {% if h %}
+  <h2 style="margin-top:22px">Klasifikasi</h2>
+  <div class="card">
+    <table><tr><th>Model</th><th>Accuracy</th><th>F1</th></tr>
+    {% for m in h.klasifikasi %}<tr class="{{ 'best' if loop.first }}"><td>{{ m.Model }}</td><td>{{ m.Accuracy }}</td><td>{{ m.F1 }}</td></tr>{% endfor %}
+    </table>
+  </div>
+  <h2>Regresi</h2>
+  <div class="card">
+    <table><tr><th>Model</th><th>MAE</th><th>R2</th></tr>
+    {% for m in h.regresi %}<tr class="{{ 'best' if loop.first }}"><td>{{ m.Model }}</td><td>{{ m.MAE }}</td><td>{{ m.R2 }}</td></tr>{% endfor %}
+    </table>
+  </div>
+  <h2>Segmen Negara</h2>
+  <div class="card">
+    <table><tr><th>Segmen</th><th>Angka</th><th>GDP/kapita</th><th>Negara</th></tr>
+    {% for s in h.segmen %}<tr><td>Segmen {{ s.HC }}</td><td>{{ s.rate }}</td><td>{{ "{:,.0f}".format(s.gdp_pc).replace(",", ".") }}</td><td>{{ s.n }}</td></tr>{% endfor %}
+    </table>
+  </div>
+  <p class="note">Baris hijau adalah model terbaik. Skor di split acak cenderung lebih tinggi dari split per negara, karena model bisa menghafal negara.</p>
+  {% else %}
+  <div class="card" style="margin-top:22px"><p class="note" style="margin:0">Hasil model belum ada. Jalankan python modelling.py dulu, lalu muat ulang halaman ini.</p></div>
+  {% endif %}
+</div>
+
+<!-- PREDIKSI -->
+<div class="pg" id="prediksi">
+  <h2 style="margin-top:22px">Coba Model</h2>
+  <div class="card" style="margin-top:0">
+    <label style="margin-top:0">Negara</label>
+    <select id="c">{% for n in negara %}<option>{{ n }}</option>{% endfor %}</select>
+    <label>Jenis kelamin</label>
+    <select id="s"><option value="male">Laki-laki</option><option value="female">Perempuan</option></select>
+    <label>Kelompok umur</label>
+    <select id="a">{% for a, v in umur %}<option value="{{ a }}">{{ a.replace(" years"," tahun") }}</option>{% endfor %}</select>
+    <label>Tahun</label>
+    <select id="y"><option>2010</option><option>2011</option><option selected>2012</option></select>
+    <button class="btn" onclick="hitung()">Hitung</button>
+  </div>
+  <div class="card" id="hasil">
+    <div class="note" style="margin:0">Kelas risiko kelompok ini</div>
+    <div class="big" id="h1"></div>
+    <div class="row"><span>Peluang kelas Tinggi</span><span id="h2"></span></div>
+    <div class="row"><span>Perkiraan angka</span><span id="h3"></span></div>
+    <p class="note">Ini perkiraan untuk satu kelompok (negara, jenis kelamin, umur), bukan penilaian seseorang. GDP dan HDI diisi otomatis dari rata-rata negara tersebut.</p>
+  </div>
+</div>
+</main>
+
+<nav>
+  <button class="on" data-t="ringkasan" onclick="buka('ringkasan')"><svg><use href="#a"/></svg>Ringkasan</button>
+  <button data-t="eksplorasi" onclick="buka('eksplorasi')"><svg><use href="#b"/></svg>Eksplorasi</button>
+  <button data-t="model" onclick="buka('model')"><svg><use href="#c"/></svg>Model</button>
+  <button data-t="prediksi" onclick="buka('prediksi')"><svg><use href="#d"/></svg>Prediksi</button>
+</nav>
+</div>
+
+<script>
+function buka(id){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id===id));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));
+  scrollTo(0,0);
+}
+async function hitung(){
+  const body={country:c.value,sex:s.value,age:a.value,year:y.value};
+  const res=await fetch('/prediksi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const d=await res.json();
+  hasil.style.display='block';
+  if(d.error){h1.textContent=d.error;h1.className='big';return}
+  h1.textContent=d.risiko;h1.className='big '+(d.risiko==='Tinggi'?'hi':'lo');
+  h2.textContent=d.peluang+'%';h3.textContent=d.angka+' per 100 ribu';
+  hasil.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
