@@ -36,6 +36,7 @@ tr.best td{font-weight:800;color:var(--teal)}
 .row{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--ln);font-size:14px}
 .row:first-of-type{border:0}.row span:last-child{font-weight:600}
 .note{font-size:12.5px;color:var(--mu);line-height:1.5;margin-top:10px}
+.dsk{display:none}.mu{color:var(--mu)}
 label{display:block;font-size:13px;color:var(--mu);margin:14px 0 5px}
 select{width:100%;padding:12px;border:1px solid var(--ln);border-radius:12px;font:inherit;background:#fff}
 .btn{width:100%;margin-top:18px;padding:14px;border:0;border-radius:12px;background:var(--navy);color:#fff;font:inherit;font-weight:700;cursor:pointer}
@@ -44,6 +45,25 @@ nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-w
 nav button{flex:1;background:none;border:0;font:inherit;font-size:12px;color:#8a909c;cursor:pointer}
 nav svg{display:block;margin:0 auto 3px;width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 nav .on{color:var(--navy);font-weight:800}
+@media(min-width:600px){ #app{max-width:720px}}
+@media(min-width:900px){
+#app{max-width:1120px;display:flex;flex-direction:column;padding-bottom:40px;margin:24px auto;border-radius:28px;overflow:hidden;box-shadow:0 8px 30px rgba(31,42,68,.12)}
+header{border-radius:0;padding:34px 40px 40px}
+header h1{font-size:30px}
+nav{order:1;position:static;transform:none;max-width:none;width:auto;border-top:0;border-bottom:1px solid var(--ln);padding:0 28px;justify-content:flex-start;gap:6px}
+nav button{flex:none;display:flex;align-items:center;gap:8px;padding:16px 20px;font-size:14px;border-bottom:3px solid transparent}
+nav svg{margin:0;width:20px;height:20px}
+nav .on{border-bottom-color:var(--teal)}
+main{order:2;padding:0 40px}
+.pg.on{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;align-items:start}
+.tiles{grid-column:1/-1;margin-top:24px;gap:16px}
+.tile{padding:20px 12px}.tile b{font-size:28px}
+.sec>h2{margin-top:26px!important}
+#eksplorasi .sec:nth-of-type(2){order:3}
+#eksplorasi .sec:nth-of-type(3){order:2}
+#model .sec:nth-of-type(3),#model>.card{grid-column:1/-1}
+#hasil{display:block}.dsk{display:block}
+}
 </style>
 </head>
 <body>
@@ -62,108 +82,125 @@ nav .on{color:var(--navy);font-weight:800}
 </header>
 
 <main>
-<!-- RINGKASAN -->
 <div class="pg on" id="ringkasan">
   <div class="tiles">
     <div class="tile"><b>{{ "{:,}".format(r.baris).replace(",", ".") }}</b><span>baris data</span></div>
     <div class="tile"><b>{{ r.negara }}</b><span>negara</span></div>
     <div class="tile"><b>{{ r.rata }}</b><span>rata-rata angka</span></div>
   </div>
-
-  <h2>Alur Analisis</h2>
-  <div class="card">
-    <div class="step"><i>1</i><p><b>Data dan cleaning</b>master.csv Kaggle, difilter 2010–2012, HDI kosong diisi median.</p></div>
-    <div class="step"><i>2</i><p><b>EDA</b>Sebaran, outlier, dan perbandingan angka antar jenis kelamin, umur, dan negara.</p></div>
-    <div class="step"><i>3</i><p><b>Modelling</b>Klasifikasi risiko Tinggi/Rendah, regresi angka, dan clustering negara.</p></div>
-    <div class="step"><i>4</i><p><b>Evaluasi</b>Perbandingan model, cross validation, dan split per negara.</p></div>
-  </div>
-
-  <h2>Temuan Utama</h2>
-  <div class="card">
-    <div class="row"><span>Laki-laki dibanding perempuan</span><span>{{ (jk.male/jk.female)|round(1) }}x</span></div>
-    <div class="row"><span>Kelompok umur tertinggi</span><span>75+ tahun</span></div>
-    <div class="row"><span>Selisih antar tahun</span><span>kecil</span></div>
-  </div>
-  <p class="note">Kalau kamu atau orang di sekitarmu sedang merasa berat, layanan kesehatan jiwa Kemenkes bisa dihubungi di 119 ekstensi 8.</p>
+  <section class="sec">
+    <h2>Alur Analisis</h2>
+    <div class="card">
+      <div class="step"><i>1</i><p><b>Data dan cleaning</b>master.csv Kaggle, difilter 2010–2012, HDI kosong diisi median.</p></div>
+      <div class="step"><i>2</i><p><b>EDA</b>Sebaran, outlier, dan perbandingan angka antar jenis kelamin, umur, dan negara.</p></div>
+      <div class="step"><i>3</i><p><b>Modelling</b>Klasifikasi risiko Tinggi/Rendah, regresi angka, dan clustering negara.</p></div>
+      <div class="step"><i>4</i><p><b>Evaluasi</b>Perbandingan model, cross validation, dan split per negara.</p></div>
+    </div>
+  </section>
+  <section class="sec">
+    <h2>Temuan Utama</h2>
+    <div class="card">
+      <div class="row"><span>Laki-laki dibanding perempuan</span><span>{{ (jk.male/jk.female)|round(1) }}x</span></div>
+      <div class="row"><span>Kelompok umur tertinggi</span><span>75+ tahun</span></div>
+      <div class="row"><span>Selisih antar tahun</span><span>kecil</span></div>
+    </div>
+    <p class="note">Kalau kamu atau orang di sekitarmu sedang merasa berat, layanan kesehatan jiwa Kemenkes bisa dihubungi di 119 ekstensi 8.</p>
+  </section>
 </div>
 
-<!-- EKSPLORASI -->
 <div class="pg" id="eksplorasi">
-  <h2 style="margin-top:22px">Jenis Kelamin</h2>
-  <div class="card">
-    {% set mx = [jk.male, jk.female]|max %}
-    {% for k, n in [("male","Laki-laki"),("female","Perempuan")] %}
-    <div class="bar"><p><span>{{ n }}</span><b>{{ jk[k] }}</b></p><i><u style="width:{{ jk[k]/mx*100 }}%"></u></i></div>
-    {% endfor %}
-  </div>
-  <h2>Kelompok Umur</h2>
-  <div class="card">
-    {% set mu = umur|map(attribute=1)|max %}
-    {% for a, v in umur %}
-    <div class="bar"><p><span>{{ a.replace(" years"," tahun") }}</span><b>{{ v }}</b></p><i><u style="width:{{ v/mu*100 }}%"></u></i></div>
-    {% endfor %}
-  </div>
-  <h2>Per Tahun</h2>
-  <div class="card">
-    {% set my = tahun.values()|max %}
-    {% for t, v in tahun.items() %}
-    <div class="bar a"><p><span>{{ t }}</span><b>{{ v }}</b></p><i><u style="width:{{ v/my*100 }}%"></u></i></div>
-    {% endfor %}
-  </div>
-  <h2>10 Negara Tertinggi</h2>
-  <div class="card">
-    {% for n, v in top %}<div class="row"><span>{{ loop.index }}. {{ n }}</span><span>{{ v }}</span></div>{% endfor %}
-  </div>
+  <section class="sec">
+    <h2>Jenis Kelamin</h2>
+    <div class="card">
+      {% set mx = [jk.male, jk.female]|max %}
+      {% for k, n in [("male","Laki-laki"),("female","Perempuan")] %}
+      <div class="bar"><p><span>{{ n }}</span><b>{{ jk[k] }}</b></p><i><u style="width:{{ jk[k]/mx*100 }}%"></u></i></div>
+      {% endfor %}
+    </div>
+  </section>
+  <section class="sec">
+    <h2>Kelompok Umur</h2>
+    <div class="card">
+      {% set mu = umur|map(attribute=1)|max %}
+      {% for a, v in umur %}
+      <div class="bar"><p><span>{{ a.replace(" years"," tahun") }}</span><b>{{ v }}</b></p><i><u style="width:{{ v/mu*100 }}%"></u></i></div>
+      {% endfor %}
+    </div>
+  </section>
+  <section class="sec">
+    <h2>Per Tahun</h2>
+    <div class="card">
+      {% set my = tahun.values()|max %}
+      {% for t, v in tahun.items() %}
+      <div class="bar a"><p><span>{{ t }}</span><b>{{ v }}</b></p><i><u style="width:{{ v/my*100 }}%"></u></i></div>
+      {% endfor %}
+    </div>
+  </section>
+  <section class="sec">
+    <h2>10 Negara Tertinggi</h2>
+    <div class="card">
+      {% for n, v in top %}<div class="row"><span>{{ loop.index }}. {{ n }}</span><span>{{ v }}</span></div>{% endfor %}
+    </div>
+  </section>
 </div>
 
-<!-- MODEL -->
 <div class="pg" id="model">
   {% if h %}
-  <h2 style="margin-top:22px">Klasifikasi</h2>
-  <div class="card">
-    <table><tr><th>Model</th><th>Accuracy</th><th>F1</th></tr>
-    {% for m in h.klasifikasi %}<tr class="{{ 'best' if loop.first }}"><td>{{ m.Model }}</td><td>{{ m.Accuracy }}</td><td>{{ m.F1 }}</td></tr>{% endfor %}
-    </table>
-  </div>
-  <h2>Regresi</h2>
-  <div class="card">
-    <table><tr><th>Model</th><th>MAE</th><th>R2</th></tr>
-    {% for m in h.regresi %}<tr class="{{ 'best' if loop.first }}"><td>{{ m.Model }}</td><td>{{ m.MAE }}</td><td>{{ m.R2 }}</td></tr>{% endfor %}
-    </table>
-  </div>
-  <h2>Segmen Negara</h2>
-  <div class="card">
-    <table><tr><th>Segmen</th><th>Angka</th><th>GDP/kapita</th><th>Negara</th></tr>
-    {% for s in h.segmen %}<tr><td>Segmen {{ s.HC }}</td><td>{{ s.rate }}</td><td>{{ "{:,.0f}".format(s.gdp_pc).replace(",", ".") }}</td><td>{{ s.n }}</td></tr>{% endfor %}
-    </table>
-  </div>
-  <p class="note">Baris hijau adalah model terbaik. Skor di split acak cenderung lebih tinggi dari split per negara, karena model bisa menghafal negara.</p>
+  <section class="sec">
+    <h2>Klasifikasi</h2>
+    <div class="card">
+      <table><tr><th>Model</th><th>Accuracy</th><th>F1</th></tr>
+      {% for m in h.klasifikasi %}<tr class="{{ 'best' if loop.first }}"><td>{{ m.Model }}</td><td>{{ m.Accuracy }}</td><td>{{ m.F1 }}</td></tr>{% endfor %}
+      </table>
+    </div>
+  </section>
+  <section class="sec">
+    <h2>Regresi</h2>
+    <div class="card">
+      <table><tr><th>Model</th><th>MAE</th><th>R2</th></tr>
+      {% for m in h.regresi %}<tr class="{{ 'best' if loop.first }}"><td>{{ m.Model }}</td><td>{{ m.MAE }}</td><td>{{ m.R2 }}</td></tr>{% endfor %}
+      </table>
+    </div>
+  </section>
+  <section class="sec">
+    <h2>Segmen Negara</h2>
+    <div class="card">
+      <table><tr><th>Segmen</th><th>Angka</th><th>GDP/kapita</th><th>Negara</th></tr>
+      {% for s in h.segmen %}<tr><td>Segmen {{ s.HC }}</td><td>{{ s.rate }}</td><td>{{ "{:,.0f}".format(s.gdp_pc).replace(",", ".") }}</td><td>{{ s.n }}</td></tr>{% endfor %}
+      </table>
+    </div>
+    <p class="note">Baris hijau adalah model terbaik. Skor di split acak cenderung lebih tinggi dari split per negara, karena model bisa menghafal negara.</p>
+  </section>
   {% else %}
   <div class="card" style="margin-top:22px"><p class="note" style="margin:0">Hasil model belum ada. Jalankan python modelling.py dulu, lalu muat ulang halaman ini.</p></div>
   {% endif %}
 </div>
 
-<!-- PREDIKSI -->
 <div class="pg" id="prediksi">
-  <h2 style="margin-top:22px">Coba Model</h2>
-  <div class="card" style="margin-top:0">
-    <label style="margin-top:0">Negara</label>
-    <select id="c">{% for n in negara %}<option>{{ n }}</option>{% endfor %}</select>
-    <label>Jenis kelamin</label>
-    <select id="s"><option value="male">Laki-laki</option><option value="female">Perempuan</option></select>
-    <label>Kelompok umur</label>
-    <select id="a">{% for a, v in umur %}<option value="{{ a }}">{{ a.replace(" years"," tahun") }}</option>{% endfor %}</select>
-    <label>Tahun</label>
-    <select id="y"><option>2010</option><option>2011</option><option selected>2012</option></select>
-    <button class="btn" onclick="hitung()">Hitung</button>
-  </div>
-  <div class="card" id="hasil">
-    <div class="note" style="margin:0">Kelas risiko kelompok ini</div>
-    <div class="big" id="h1"></div>
-    <div class="row"><span>Peluang kelas Tinggi</span><span id="h2"></span></div>
-    <div class="row"><span>Perkiraan angka</span><span id="h3"></span></div>
-    <p class="note">Ini perkiraan untuk satu kelompok (negara, jenis kelamin, umur), bukan penilaian seseorang. GDP dan HDI diisi otomatis dari rata-rata negara tersebut.</p>
-  </div>
+  <section class="sec">
+    <h2>Coba Model</h2>
+    <div class="card" style="margin-top:0">
+      <label style="margin-top:0">Negara</label>
+      <select id="negara">{% for n in negara %}<option>{{ n }}</option>{% endfor %}</select>
+      <label>Jenis kelamin</label>
+      <select id="sex"><option value="male">Laki-laki</option><option value="female">Perempuan</option></select>
+      <label>Kelompok umur</label>
+      <select id="umur">{% for a, v in umur %}<option value="{{ a }}">{{ a.replace(" years"," tahun") }}</option>{% endfor %}</select>
+      <label>Tahun</label>
+      <select id="tahun"><option>2010</option><option>2011</option><option selected>2012</option></select>
+      <button class="btn" onclick="hitung()">Hitung</button>
+    </div>
+  </section>
+  <section class="sec">
+    <h2 class="dsk">Hasil</h2>
+    <div class="card" id="hasil" style="margin-top:0">
+      <div class="note" style="margin:0">Kelas risiko kelompok ini</div>
+      <div class="big mu" id="h1">Belum dihitung</div>
+      <div class="row"><span>Peluang kelas Tinggi</span><span id="h2">-</span></div>
+      <div class="row"><span>Perkiraan angka</span><span id="h3">-</span></div>
+      <p class="note">Ini perkiraan untuk satu kelompok (negara, jenis kelamin, umur), bukan penilaian seseorang. GDP dan HDI diisi otomatis dari rata-rata negara tersebut.</p>
+    </div>
+  </section>
 </div>
 </main>
 
@@ -177,19 +214,21 @@ nav .on{color:var(--navy);font-weight:800}
 
 <script>
 function buka(id){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.toggle('on',p.id===id));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));
-  scrollTo(0,0);
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.toggle('on',p.id===id)});
+  document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.t===id)});
+  window.scrollTo(0,0);
 }
-async function hitung(){
-  const body={country:c.value,sex:s.value,age:a.value,year:y.value};
-  const res=await fetch('/prediksi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-  const d=await res.json();
-  hasil.style.display='block';
-  if(d.error){h1.textContent=d.error;h1.className='big';return}
-  h1.textContent=d.risiko;h1.className='big '+(d.risiko==='Tinggi'?'hi':'lo');
-  h2.textContent=d.peluang+'%';h3.textContent=d.angka+' per 100 ribu';
-  hasil.scrollIntoView({behavior:'smooth'});
+function hitung(){
+  var g=function(i){return document.getElementById(i)};
+  var body={country:g('negara').value,sex:g('sex').value,age:g('umur').value,year:g('tahun').value};
+  fetch('/prediksi',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    .then(function(r){return r.json()}).then(function(d){
+      g('hasil').style.display='block';
+      if(d.error){g('h1').textContent=d.error;g('h1').className='big';return}
+      g('h1').textContent=d.risiko;g('h1').className='big '+(d.risiko==='Tinggi'?'hi':'lo');
+      g('h2').textContent=d.peluang+'%';g('h3').textContent=d.angka+' per 100 ribu';
+      g('hasil').scrollIntoView({behavior:'smooth'});
+    });
 }
 </script>
 </body>
