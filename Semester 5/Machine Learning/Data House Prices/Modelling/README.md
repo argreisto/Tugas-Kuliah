@@ -39,6 +39,3 @@ python app.py
 
 Lalu buka http://127.0.0.1:5000 di browser. `modelling.py` harus dijalankan dulu karena file `model.joblib` dibuat dari situ.
 
-## Catatan
-
-Prediksinya cuma perkiraan, karena hanya memakai 8 fitur dan datanya dari satu kota saja.
