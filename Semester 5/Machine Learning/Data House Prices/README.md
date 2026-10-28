@@ -2,7 +2,7 @@
 
 Tugas ini dipakai untuk memprediksi harga rumah di Ames, Iowa. Datanya ada 1.460 rumah dengan 81 kolom. Hasil modelnya saya tampilkan dalam web sederhana pakai Flask.
 
-## Isi folder
+## Isi folder Modelling
 
 - `data_cleaning_house_prices.ipynb`: cleaning data, EDA, dan splitting data
 - `modelling.py`: melatih model lalu menyimpannya ke `model.joblib` dan `hasil_model.json`
