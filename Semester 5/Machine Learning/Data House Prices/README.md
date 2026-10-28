@@ -1,8 +1,6 @@
 # Prediksi Harga Rumah
 
-Tugas Analisis Data oleh Argreisto Daniel K.
-
-Project ini dipakai untuk memprediksi harga rumah di Ames, Iowa. Datanya ada 1.460 rumah dengan 81 kolom. Hasil modelnya saya tampilkan dalam web sederhana pakai Flask.
+Tugas ini dipakai untuk memprediksi harga rumah di Ames, Iowa. Datanya ada 1.460 rumah dengan 81 kolom. Hasil modelnya saya tampilkan dalam web sederhana pakai Flask.
 
 ## Isi folder
 
