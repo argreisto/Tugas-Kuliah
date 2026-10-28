@@ -1,44 +1,45 @@
-# Prediksi Harga Rumah
+# House Prices - Data Cleaning dan Prediksi Harga Rumah
 
-Tugas ini dipakai untuk memprediksi harga rumah di Ames, Iowa. Datanya ada 1.460 rumah dengan 81 kolom. Hasil modelnya saya tampilkan dalam web sederhana pakai Flask.
+Repository ini berisi proyek machine learning untuk memprediksi harga jual rumah memakai dataset [House Prices - Advanced Regression Techniques](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques) dari Kaggle.
 
-## Isi folder Modelling
+Tugas ini dibuat untuk belajar alur pengolahan data sampai model bisa dipakai di aplikasi web sederhana.
 
-- `data_cleaning_house_prices.ipynb`: cleaning data, EDA, dan splitting data
-- `modelling.py`: melatih model lalu menyimpannya ke `model.joblib` dan `hasil_model.json`
-- `app.py`: aplikasi Flask
-- `templates/index.html`: tampilan web
-- `train.csv`: dataset
-- `requirements.txt`: daftar library yang dipakai
+Teknologi yang dipakai: Python, Pandas, Scikit-learn, dan Flask.
 
-## Yang dikerjakan
+---
 
-1. Cleaning data. Nilai kosong diisi median (kolom angka) atau modus (kolom kategori), dan kolom yang datanya terlalu banyak kosong dibuang.
-2. EDA untuk melihat sebaran harga dan fitur mana yang paling berhubungan dengan harga.
-3. Modelling dengan tiga algoritma: Linear Regression, Random Forest, dan Gradient Boosting.
-4. Evaluasi pakai MAE, RMSE, R2, dan cross validation 5 fold.
-5. Hasilnya dibuat jadi web dengan halaman Ringkasan, Eksplorasi, Model, dan Prediksi.
+## Dataset
 
-## Fitur yang dipakai di web
+Dataset ada di file `house-prices-advanced-regression-techniques.zip`.
 
-Supaya form prediksi tidak terlalu panjang, saya hanya pakai 8 fitur: OverallQual, GrLivArea, TotalBsmtSF, LotArea, YearBuilt, GarageCars, FullBath, dan Neighborhood.
+Isinya:
 
-Harga dilatih dalam bentuk log (`log1p`) supaya sebarannya lebih rata, lalu dikembalikan ke dolar waktu prediksi.
+`train.csv` : data latih beserta harga jual (`SalePrice`)
 
-## Hasil
+`test.csv` : data uji tanpa harga
 
-Model terbaik adalah Gradient Boosting, dipilih dari nilai cross validation (R2 sekitar 0,86). Rata-rata kesalahannya (MAE) sekitar $17.900. Tabel lengkapnya bisa dilihat di halaman Model.
+`data_description.txt` : penjelasan tiap kolom
 
-## Cara menjalankan
+`sample_submission.csv` : contoh format hasil prediksi
 
-```
-pip install -r requirements.txt
-python modelling.py
-python app.py
-```
+Ekstrak zip-nya dulu sebelum menjalankan notebook.
 
-Lalu buka http://127.0.0.1:5000 di browser. `modelling.py` harus dijalankan dulu karena file `model.joblib` dibuat dari situ.
+---
 
-## Catatan
+## Data Cleaning dan EDA
 
-Prediksinya cuma perkiraan, karena hanya memakai 8 fitur dan datanya dari satu kota saja.
+Notebook `Data Cleaning House Prices.ipynb` berisi pengecekan tipe data dan missing value, eksplorasi data, dan persiapan fitur sebelum masuk ke tahap modeling.
+
+Notebook ini bisa dibuka lewat Jupyter Notebook, VS Code, atau Google Colab.
+
+Pastikan path ke `train.csv` sesuai dengan lokasi file di komputermu.
+
+---
+
+## Modelling dan Prediksi
+
+Semua yang berkaitan dengan model ada di folder `modelling/`.
+
+Isinya kode training, model yang sudah disimpan, dan aplikasi web untuk prediksi harga rumah.
+
+Cara instalasi dan menjalankannya ada di [modelling/README.md](modelling/README.md).
