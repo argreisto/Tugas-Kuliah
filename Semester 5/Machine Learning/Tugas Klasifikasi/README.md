@@ -1,7 +1,9 @@
 # Tugas Machine Learning: Klasifikasi Biner, Multi-class, dan Multi-label
 
 Nama  : Argreisto Daniel Krismiawan
+
 NIM   : 241011400910
+
 Kelas : 05TPLP023
 
 ## Tentang tugas ini
