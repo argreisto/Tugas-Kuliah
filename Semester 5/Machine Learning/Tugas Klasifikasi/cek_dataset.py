@@ -59,6 +59,42 @@ def cek(nama, path, label, jenis, sep=","):
     return {"dataset": nama, "harapan": jenis, "hasil": hasil, "cocok": cocok}
 
 
+def cek_tsv_indeks(nama, path, jenis="MULTI-LABEL"):
+    """
+    Khusus GoEmotions versi train.tsv.
+    Isi file: tiga kolom tanpa judul -> teks, daftar nomor emosi (misal "3,27"), id komentar.
+    Jadi labelnya bukan kolom 0/1, tapi nomor emosi yang dipisah koma.
+    """
+    print("=" * 55)
+    print(nama, "| harapan:", jenis)
+
+    if not os.path.exists(path):
+        print("File tidak ditemukan:", path)
+        return {"dataset": nama, "harapan": jenis, "hasil": "FILE HILANG", "cocok": False}
+
+    df = pd.read_csv(path, sep="\t", header=None, names=["text", "label", "id"])
+    print("Jumlah baris:", len(df))
+
+    # pecah "3,27" jadi daftar nomor
+    daftar = df["label"].astype(str).str.split(",")
+    jumlah_per_baris = daftar.apply(len)
+    nomor_unik = set(n for baris in daftar for n in baris)
+
+    print("Jumlah nomor emosi yang berbeda:", len(nomor_unik))
+    print("Baris dengan lebih dari 1 label:", int((jumlah_per_baris > 1).sum()))
+    print("Paling banyak label dalam 1 baris:", int(jumlah_per_baris.max()))
+
+    if len(nomor_unik) > 2 and (jumlah_per_baris > 1).sum() > 0:
+        hasil = "MULTI-LABEL"
+    else:
+        hasil = "BUKAN MULTI-LABEL"
+    print("->", hasil)
+
+    cocok = hasil == jenis
+    print("COCOK!" if cocok else "TIDAK COCOK, cek lagi")
+    return {"dataset": nama, "harapan": jenis, "hasil": hasil, "cocok": cocok}
+
+
 hasil_semua = []
 
 # ---------- BINER ----------
@@ -73,9 +109,9 @@ hasil_semua.append(cek("Maternal Health Risk", "data/Maternal Health Risk Data S
 hasil_semua.append(cek("Student Dropout", "data/data.csv", "Target", "MULTI-CLASS", sep=";"))
 
 # ---------- MULTI-LABEL ----------
-hasil_semua.append(cek("GoEmotions", "data/goemotions_1.csv", 28, "MULTI-LABEL"))
+hasil_semua.append(cek_tsv_indeks("GoEmotions", "data/train.tsv"))
 hasil_semua.append(cek("Jigsaw Toxic", "data/jigsaw_train.csv", 6, "MULTI-LABEL"))
-hasil_semua.append(cek("Movie Posters", "data/Train.csv", 25, "MULTI-LABEL"))
+hasil_semua.append(cek("Movie Posters", "data/movie_train.csv", 25, "MULTI-LABEL"))
 
 # ---------- RINGKASAN ----------
 print("\n" + "=" * 55)
