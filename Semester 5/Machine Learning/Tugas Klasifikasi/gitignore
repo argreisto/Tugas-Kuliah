@@ -1,9 +1,0 @@
-# Dataset tidak di-upload (ukuran besar, download sendiri dari Kaggle)
-data/
-
-# Python
-__pycache__/
-*.pyc
-.venv/
-venv/
-.ipynb_checkpoints/
