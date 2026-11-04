@@ -47,7 +47,7 @@ Multi-class:
 Multi-label:
 7. GoEmotions, 28 kolom emosi (27 emosi ditambah netral)
    https://www.kaggle.com/datasets/debarshichanda/goemotions
-8. Toxic Comment Classification (Jigsaw), 6 kolom jenis toxic
+8. Toxic Comment Classification (Jigsaw, versi Emoji-Aware), 6 kolom jenis toxic
    https://www.kaggle.com/datasets/duaachaseb/multi-label-toxic-comment-classification-dataset
 9. Movie Posters, 25 kolom genre film (pakai file csv di folder Multi_Label_dataset)
    https://www.kaggle.com/datasets/raman77768/movie-classifier
@@ -67,29 +67,47 @@ Untuk multi-label, saya ambil kolom-kolom label di paling kanan. Terus saya cek 
 ## Cara menjalankan
 
 1. Install library dulu: pip install -r requirements.txt
-2. Bikin folder data, lalu taruh semua file hasil download di situ. Ada dua file yang sama-sama bernama train.csv, jadi saya ganti nama jadi hotel_train.csv dan jigsaw_train.csv.
+2. Download dataset dari link di atas. Saya taruh semuanya di folder Dataset, satu dataset satu subfolder (contoh: Dataset/Raisin_Dataset, Dataset/GoEmotions, dst). Folder Dataset ini sejajar dengan cek_dataset.py. Kode akan mencari file-nya sendiri sampai ke dalam subfolder.
 3. Jalankan dari dalam folder repository: python cek_dataset.py
+4. Kalau mau disimpan ke file: python cek_dataset.py > hasil.txt
 
-Folder data sudah saya masukkan ke .gitignore jadi tidak ikut ke GitHub.
+Folder Dataset tidak saya upload ke GitHub karena ukurannya besar, makanya masuk .gitignore.
 
 ## Hasil
 
+Output lengkap ada di file hasil.txt. Ringkasannya begini.
+
 Dataset biner:
-- Student Depression punya 2 nilai di kolom Depression, jadi biner.
-- Hotel Review punya 2 kelas (happy dan not happy) dengan 38.932 baris, jadi biner.
-- Raisin punya 2 kelas varietas kismis dengan 900 data, jadi biner.
+- Student Depression: 27.901 baris, kolom Depression punya 2 nilai (1 = 16.336, 0 = 11.565). Jadi biner.
+- Hotel Review: 38.932 baris, kolom Is_Response punya 2 kelas (happy 26.521, not happy 12.411). Jadi biner.
+- Raisin: 900 baris, kolom Class punya 2 kelas (Kecimen 450, Besni 450). Jadi biner.
 
 Dataset multi-class:
-- Date Fruit punya 7 kelas jenis kurma, jadi multi-class.
-- Maternal Health Risk punya 3 kelas (low, mid, high), jadi multi-class.
-- Student Dropout punya 3 kelas dari 4.424 mahasiswa: dropout 1.421, enrolled 794, graduate 2.209, jadi multi-class.
+- Date Fruit: 898 baris, kolom Class punya 7 kelas (Dokol 204, Safavi 199, Rotana 166, Deglet 98, Sogay 94, Iraqi 72, Berhi 65). Jadi multi-class.
+- Maternal Health Risk: 1.014 baris, kolom RiskLevel punya 3 kelas (low risk 406, mid risk 336, high risk 272). Jadi multi-class.
+- Student Dropout: 4.424 baris, kolom Target punya 3 kelas (Graduate 2.209, Dropout 1.421, Enrolled 794). Jadi multi-class.
 
 Dataset multi-label:
-- GoEmotions punya 28 kolom emosi yang isinya 0 dan 1, dan ada komentar yang punya lebih dari satu emosi, jadi multi-label.
-- Jigsaw Toxic punya 6 kolom label 0 dan 1, dan ada komentar yang kena lebih dari satu label, jadi multi-label.
-- Movie Posters punya 25 kolom genre 0 dan 1, dan satu film bisa punya beberapa genre, jadi multi-label.
+- GoEmotions: 70.000 baris (file goemotions_1.csv), 28 kolom emosi (27 emosi dan neutral) yang isinya cuma 0 dan 1. Ada 11.887 baris yang punya lebih dari satu label aktif. Jadi multi-label.
+- Jigsaw Toxic (Emoji-Aware Toxic Comment): 22.303 baris, 6 kolom label (toxic, severe_toxic, obscene, threat, insult, identity_hate) yang isinya cuma 0 dan 1. Ada 11.859 baris yang punya lebih dari satu label aktif. Jadi multi-label.
+- Movie Posters: 7.254 baris, 25 kolom genre (Action, Adventure, Animation, dan seterusnya) yang isinya cuma 0 dan 1. Ada 5.932 baris yang punya lebih dari satu genre. Jadi multi-label.
 
-Kesimpulannya, label di ke-9 dataset sudah sesuai dengan jenis klasifikasi yang saya pilih. Tiga dataset pertama biner karena kelasnya ada 2, tiga berikutnya multi-class karena kelasnya lebih dari 2, dan tiga terakhir multi-label karena labelnya banyak kolom dan satu baris bisa punya lebih dari satu label.
+Tabel ringkasan dari program:
+
+    dataset                   harapan      hasil        cocok
+    Student Depression        BINER        BINER        True
+    Hotel Review (Happiness)  BINER        BINER        True
+    Raisin                    BINER        BINER        True
+    Date Fruit                MULTI-CLASS  MULTI-CLASS  True
+    Maternal Health Risk      MULTI-CLASS  MULTI-CLASS  True
+    Student Dropout           MULTI-CLASS  MULTI-CLASS  True
+    GoEmotions                MULTI-LABEL  MULTI-LABEL  True
+    Jigsaw Toxic              MULTI-LABEL  MULTI-LABEL  True
+    Movie Posters             MULTI-LABEL  MULTI-LABEL  True
+
+Kesimpulannya, label di ke-9 dataset sudah sesuai dengan jenis klasifikasi yang saya pilih. Tiga dataset pertama biner karena kelasnya ada 2. Tiga berikutnya multi-class karena kelasnya lebih dari 2 dan tiap data hanya punya satu kelas. Tiga terakhir multi-label karena labelnya banyak kolom 0/1 dan ada baris yang punya lebih dari satu label aktif.
+
+Catatan kecil: di dataset Movie Posters ada satu kolom genre bernama "N/A", artinya film yang genrenya tidak diketahui. Kolom itu tetap saya hitung sebagai salah satu dari 25 kolom label.
 
 ## Referensi
 
