@@ -1,114 +1,83 @@
+import os
 import pandas as pd
-from scipy.io import arff
 
 
-def baca_file(path, sep=","):
-    """Membaca file csv, xlsx, atau arff jadi tabel pandas."""
+def baca(path, sep=","):
+    """Baca file sesuai ekstensinya (.xlsx, .tsv, atau .csv)."""
     if path.endswith(".xlsx"):
-        return pd.read_excel(path)
-    if path.endswith(".arff"):
-        data, meta = arff.loadarff(path)
-        df = pd.DataFrame(data)
-        # arff menyimpan teks dalam bentuk bytes, jadi diubah ke teks biasa
-        for k in df.columns:
-            df[k] = df[k].apply(
-                lambda x: x.decode("utf-8") if isinstance(x, bytes) else x
-            )
-        return df
+        return pd.read_excel(path)  # butuh openpyxl
+    if path.endswith(".tsv"):
+        return pd.read_csv(path, sep="\t")
     return pd.read_csv(path, sep=sep)
 
 
-def cek(nama, path, label, harapan, sep=","):
+def cek(nama, path, label, jenis, sep=","):
     """
-    label  : nama kolom label (biner / multi-class)
-             ATAU angka jumlah label (multi-label, label ada di kolom paling belakang)
-    harapan: BINER / MULTI-CLASS / MULTI-LABEL
+    nama  : nama dataset (untuk ditampilkan)
+    path  : lokasi file
+    label : untuk BINER / MULTI-CLASS -> nama kolom label
+            untuk MULTI-LABEL         -> jumlah kolom label (dihitung dari kolom paling kanan)
+    jenis : jenis yang diharapkan ("BINER", "MULTI-CLASS", "MULTI-LABEL")
     """
-    print("\n" + "=" * 55)
-    print("Dataset :", nama)
+    print("=" * 55)
+    print(nama, "| harapan:", jenis)
 
-    try:
-        df = baca_file(path, sep)
-    except FileNotFoundError:
+    if not os.path.exists(path):
         print("File tidak ditemukan:", path)
-        return None
+        return {"dataset": nama, "harapan": jenis, "hasil": "FILE HILANG", "cocok": False}
 
-    df.columns = df.columns.astype(str).str.strip()
-    print("Jumlah baris :", len(df))
-    if len(df) < 250:
-        print("PERINGATAN: kurang dari 250 baris!")
+    df = baca(path, sep)
+    print("Jumlah baris:", len(df))
 
-    if isinstance(label, int):
-        # ---- MULTI-LABEL: ada banyak kolom label berisi 0/1 ----
-        kolom_label = list(df.columns[-label:])
-        df[kolom_label] = df[kolom_label].astype(int)
-        hanya_0_1 = df[kolom_label].isin([0, 1]).all().all()
-        baris_ganda = (df[kolom_label].sum(axis=1) > 1).sum()
-
-        print("Jumlah kolom label :", len(kolom_label))
-        print("Contoh nama label  :", kolom_label[:5])
-        print("Semua isi label hanya 0 dan 1 :", hanya_0_1)
-        print("Baris dengan lebih dari 1 label aktif :", baris_ganda)
-
-        if hanya_0_1 and baris_ganda > 0:
-            hasil = "MULTI-LABEL"
-        else:
-            hasil = "BUKAN MULTI-LABEL"
-        jumlah = len(kolom_label)
-        nama_label = "%d kolom" % len(kolom_label)
-    else:
-        # ---- BINER / MULTI-CLASS: hanya 1 kolom label ----
-        if label not in df.columns:
-            print("Kolom '%s' tidak ada. Daftar kolom:" % label)
-            print(list(df.columns))
-            return None
-
-        print("Kolom label :", label)
-        print(df[label].value_counts())
+    if jenis in ("BINER", "MULTI-CLASS"):
+        # Satu kolom label, hitung ada berapa kelas
         jumlah = df[label].nunique()
-        print("Jumlah kategori label :", jumlah)
-
+        print(df[label].value_counts())
         if jumlah == 2:
             hasil = "BINER"
         elif jumlah > 2:
             hasil = "MULTI-CLASS"
         else:
-            hasil = "HANYA 1 KATEGORI"
-        nama_label = label
+            hasil = "HANYA 1 KELAS"
+        print("Jumlah kelas:", jumlah, "->", hasil)
+    else:
+        # Beberapa kolom label (0/1). Ambil kolom paling kanan.
+        kolom = df.columns[-label:]
+        print("Jumlah kolom label:", len(kolom))
+        cuma_01 = all(set(df[k].dropna().unique()) <= {0, 1} for k in kolom)
+        print("Semua label berisi 0/1 saja?", cuma_01)
+        banyak = int((df[kolom].sum(axis=1) > 1).sum())
+        print("Baris dengan lebih dari 1 label aktif:", banyak)
+        if len(kolom) > 2 and cuma_01 and banyak > 0:
+            hasil = "MULTI-LABEL"
+        else:
+            hasil = "BUKAN MULTI-LABEL"
+        print("->", hasil)
 
-    cocok = hasil == harapan
-    print("Hasil  :", hasil)
-    print("Cocok dengan harapan?", cocok)
-
-    return {
-        "Dataset": nama,
-        "Kolom label": nama_label,
-        "Jumlah label/kategori": jumlah,
-        "Jumlah baris": len(df),
-        "Hasil": hasil,
-        "Cocok": cocok,
-    }
+    cocok = hasil == jenis
+    print("COCOK!" if cocok else "TIDAK COCOK, cek lagi")
+    return {"dataset": nama, "harapan": jenis, "hasil": hasil, "cocok": cocok}
 
 
 hasil_semua = []
 
 # ---------- BINER ----------
-hasil_semua.append(cek("Student Depression", "data/student_depression_dataset.csv", "Depression", "BINER"))
-hasil_semua.append(cek("Predict the Happiness", "data/train.csv", "Is_Response", "BINER"))
+hasil_semua.append(cek("Student Depression", "data/Student Depression Dataset.csv", "Depression", "BINER"))
+hasil_semua.append(cek("Hotel Review (Happiness)", "data/hotel_train.csv", "Is_Response", "BINER"))
 hasil_semua.append(cek("Raisin", "data/Raisin_Dataset.xlsx", "Class", "BINER"))
 
 # ---------- MULTI-CLASS ----------
 hasil_semua.append(cek("Date Fruit", "data/Date_Fruit_Datasets.xlsx", "Class", "MULTI-CLASS"))
 hasil_semua.append(cek("Maternal Health Risk", "data/Maternal Health Risk Data Set.csv", "RiskLevel", "MULTI-CLASS"))
+# Kalau kolom menyatu jadi satu, pakai pemisah titik koma (sep=";")
 hasil_semua.append(cek("Student Dropout", "data/data.csv", "Target", "MULTI-CLASS", sep=";"))
 
 # ---------- MULTI-LABEL ----------
-hasil_semua.append(cek("Birds", "data/birds.arff", 19, "MULTI-LABEL"))
-hasil_semua.append(cek("Genbase", "data/genbase.arff", 27, "MULTI-LABEL"))
-hasil_semua.append(cek("Medical", "data/medical.arff", 45, "MULTI-LABEL"))
+hasil_semua.append(cek("GoEmotions", "data/goemotions_1.csv", 28, "MULTI-LABEL"))
+hasil_semua.append(cek("Jigsaw Toxic", "data/jigsaw_train.csv", 6, "MULTI-LABEL"))
+hasil_semua.append(cek("Movie Posters", "data/Train.csv", 25, "MULTI-LABEL"))
 
 # ---------- RINGKASAN ----------
 print("\n" + "=" * 55)
 print("RINGKASAN")
-ringkasan = pd.DataFrame([h for h in hasil_semua if h is not None])
-print(ringkasan.to_string(index=False))
+print(pd.DataFrame(hasil_semua).to_string(index=False))
