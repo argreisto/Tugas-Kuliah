@@ -12,9 +12,7 @@ Di tugas ini saya diminta mencari 3 jenis klasifikasi, yaitu biner, multi-class,
 
 Semua kodenya ada di file cek_dataset.py.
 
-## Yang saya pelajari
-
-Awalnya saya kira ketiganya sama saja, ternyata beda.
+## Pemahaman saya
 
 Klasifikasi biner itu labelnya cuma ada 2 pilihan. Contohnya senang atau tidak senang.
 
@@ -29,30 +27,39 @@ Jadi gampangnya, biner dan multi-class cuma punya satu kolom label, sedangkan mu
 Semuanya dari Kaggle dan perlu login untuk download. Datasetnya tidak saya upload ke GitHub karena ukurannya besar (terutama Hotel Review dan GoEmotions), jadi silakan download lewat link di bawah.
 
 Biner:
+
 1. Student Depression, kolom label Depression (0 dan 1)
    https://www.kaggle.com/datasets/hopesb/student-depression-dataset
+   
 2. Hotel Review (Predict the Happiness), kolom label Is_Response (happy dan not happy), pakai file train.csv
    https://www.kaggle.com/datasets/anu0012/hotel-review
+   
 3. Raisin, kolom label Class (2 varietas kismis)
    https://www.kaggle.com/datasets/muratkokludataset/raisin-dataset
 
 Multi-class:
+
 4. Date Fruit, kolom label Class (7 jenis kurma)
    https://www.kaggle.com/datasets/muratkokludataset/date-fruit-datasets
+   
 5. Maternal Health Risk, kolom label RiskLevel (low, mid, high)
    https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data
+   
 6. Student Dropout and Academic Success, kolom label Target (dropout, enrolled, graduate)
    https://www.kaggle.com/datasets/hamnawaseem112222222/predict-students-dropout-and-academic-success
 
 Multi-label:
+
 7. GoEmotions, 28 kolom emosi (27 emosi ditambah netral)
    https://www.kaggle.com/datasets/debarshichanda/goemotions
+   
 8. Toxic Comment Classification (Jigsaw, versi Emoji-Aware), 6 kolom jenis toxic
    https://www.kaggle.com/datasets/duaachaseb/multi-label-toxic-comment-classification-dataset
+   
 9. Movie Posters, 25 kolom genre film (pakai file csv di folder Multi_Label_dataset)
    https://www.kaggle.com/datasets/raman77768/movie-classifier
 
-## Cara ngecek pakai pandas
+## Cara cek pakai pandas
 
 Untuk biner dan multi-class, saya hitung jumlah kelas di kolom label pakai nunique(). Kalau hasilnya 2 berarti biner, kalau lebih dari 2 berarti multi-class. Saya juga tampilkan value_counts() supaya kelihatan jumlah data tiap kelasnya.
 
@@ -111,6 +118,8 @@ Catatan kecil: di dataset Movie Posters ada satu kolom genre bernama "N/A", arti
 
 ## Referensi
 
-Siringoringo, R., Jamaluddin, & Perangin-angin, R. (2022). Text mining dan klasifikasi multi label menggunakan XGBoost. METHOMIKA: Jurnal Manajemen Informatika & Komputerisasi Akuntansi, 6(2), 234-238. https://doi.org/10.46880/jmika.Vol6No2.pp234-238
+Sinapoy, M. I. K., Sibaroni, Y., & Prasetyowati, S. S. (2023). Comparison of LSTM and IndoBERT method in identifying hoax on Twitter. Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), 7(3), 657-662. https://doi.org/10.29207/resti.v7i3.4830
 
-Dari artikel ini saya belajar bahwa klasifikasi biasa cuma mencari satu label, sedangkan multi-label memungkinkan satu teks punya beberapa label. Penulisnya memakai data artikel ilmiah dengan 6 kategori (Computer Science, Physics, Mathematics, Statistics, Quantitative Biology, Quantitative Finance), dan satu artikel bisa masuk ke lebih dari satu kategori. Mereka membandingkan XGBoost dengan Logistic Regression. Hasilnya XGBoost lebih bagus, rata-rata akurasi 0,88 dan F1-score 0,78, sedangkan Logistic Regression akurasi 0,81 dan F1-score 0,47. Dari sini saya jadi lebih paham bahwa di multi-label tiap kolom label berisi 0 atau 1 dan satu baris boleh punya lebih dari satu angka 1, sama seperti dataset GoEmotions, Jigsaw, dan Movie Posters yang saya pakai.
+Aldania, A. N. A., Soleh, A. M., & Notodiputro, K. A. (2023). A comparative study of CatBoost and double random forest for multi-class classification. Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), 7(1), 129-137. https://doi.org/10.29207/resti.v7i1.4766
+
+Indriani, F., Nugroho, R. A., Faisal, M. R., & Kartini, D. (2024). Comparative evaluation of IndoBERT, IndoBERTweet, and mBERT for multilabel student feedback classification. Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), 8(6), 748-757. https://doi.org/10.29207/resti.v8i6.6100
