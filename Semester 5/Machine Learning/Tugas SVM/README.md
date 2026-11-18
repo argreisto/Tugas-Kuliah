@@ -18,7 +18,7 @@ Repo ini berisi tugas latihan SVM dengan Scikit-learn yang dikerjakan dalam satu
 
 ```
 .
-├── Tugas_SVM_241011400910.ipynb
+├── Tugas_SVM.ipynb
 ├── data/
 │   ├── diabetes.csv
 │   └── Salary_Data.csv
@@ -32,7 +32,7 @@ Di komputer sendiri:
 
 ```
 pip install -r requirements.txt
-jupyter notebook Tugas_SVM_241011400910.ipynb
+jupyter notebook Tugas_SVM.ipynb
 ```
 
 Lalu jalankan semua sel dari atas ke bawah (Run All). Notebook membaca csv dari folder `data/`.
