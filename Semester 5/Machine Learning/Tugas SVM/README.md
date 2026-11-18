@@ -25,9 +25,8 @@ jupyter notebook Tugas_SVM.ipynb
 
 Lalu jalankan semua sel dari atas ke bawah (Run All). Notebook membaca csv dari folder `data/`.
 
-Di Google Colab: upload notebook-nya, lalu upload `diabetes.csv` dan `Salary_Data.csv` saat diminta (atau taruh keduanya di folder `data/`).
+Di Google Colab atau Jupyter Notebook: upload notebook-nya, lalu upload `diabetes.csv` dan `Salary_Data.csv` (atau taruh keduanya di folder `data/`).
 
-Notebook ini sudah dijalankan penuh dan outputnya tersimpan, jadi hasilnya bisa langsung dilihat di GitHub tanpa dijalankan ulang. Saya juga sudah menguji ulang semua sel dari nol di folder bersih, dan hasilnya sama dengan output yang tersimpan.
 
 ## Ringkasan hasil
 
