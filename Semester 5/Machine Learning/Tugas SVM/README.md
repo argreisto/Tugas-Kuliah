@@ -3,7 +3,7 @@
 - Nama : Argreisto Daniel Krismiawan
 - NIM : 241011400910
 
-Repo ini berisi tugas latihan SVM dengan Scikit-learn yang dikerjakan dalam satu notebook. Tiap latihan mengikuti materi yang diberikan, lalu saya tambahkan eksplorasi sendiri (bagian yang judulnya diawali "Tambahan:") supaya hasilnya bisa dibahas lebih dalam.
+Repo ini berisi tugas latihan SVM dengan Scikit-learn yang dikerjakan dalam satu notebook sesuai materi.
 
 ## Isi notebook
 
